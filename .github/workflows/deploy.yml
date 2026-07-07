@@ -5,9 +5,17 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     
     steps:
     - name: Checkout code
@@ -18,20 +26,21 @@ jobs:
       with:
         node-version: '18'
         cache: 'npm'
-        cache-dependency-path: 'weather-app-fixed/package-lock.json'
+        cache-dependency-path: weather-app-fixed/package-lock.json
     
     - name: Install dependencies
-      run: |
-        cd weather-app-fixed
-        npm ci --legacy-peer-deps
+      working-directory: weather-app-fixed
+      run: npm ci --legacy-peer-deps
     
     - name: Build Angular app
-      run: |
-        cd weather-app-fixed
-        npm run build:prod
+      working-directory: weather-app-fixed
+      run: npm run build:prod
     
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./weather-app-fixed/dist/weather-app/browser
+        publish_dir: weather-app-fixed/dist/weather-app/browser
+        user_name: 'github-actions[bot]'
+        user_email: 'github-actions[bot]@users.noreply.github.com'
+        keep_files: false
