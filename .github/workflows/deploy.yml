@@ -18,15 +18,20 @@ jobs:
       with:
         node-version: '18'
         cache: 'npm'
+        cache-dependency-path: 'weather-app-fixed/package-lock.json'
     
     - name: Install dependencies
-      run: npm ci --legacy-peer-deps
+      run: |
+        cd weather-app-fixed
+        npm ci --legacy-peer-deps
     
     - name: Build Angular app
-      run: npm run build:prod
+      run: |
+        cd weather-app-fixed
+        npm run build:prod
     
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./dist/weather-app/browser  # Changed to include /browser
+        publish_dir: ./weather-app-fixed/dist/weather-app/browser
