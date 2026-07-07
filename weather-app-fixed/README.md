@@ -2,20 +2,20 @@
 
 A simple Angular weather dashboard that displays weather forecast data from a REST API with automatic deployment to GitHub Pages using GitHub Actions.
 
-## Project Description
+## Live Demo
 
-This application provides a clean, responsive interface to view weather forecasts. It integrates with a .NET Web API to fetch and display weather data in a tabular format with loading states, error handling, and responsive design.
+**Deployed Application:** https://padmavathi-sj.github.io/github_CI_CD_test/
 
 ## Features
 
-- 🌤️ Displays weather forecasts in a clean table format
-- 📱 Fully responsive design for desktop and mobile
-- 🔄 Refresh button to reload weather data
-- ⚡ Loading state with spinner animation
-- ❌ User-friendly error handling
-- 🎨 Modern gradient UI design
-- 🔥 Highlights temperatures > 30°C (Bonus)
-- 📊 Displays total forecast records count (Bonus)
+- Displays weather forecasts in a clean table format
+-  Fully responsive design for desktop and mobile
+-  Refresh button to reload weather data
+-  Loading state with spinner animation
+-  User-friendly error handling
+-  Modern gradient UI design
+-  Highlights temperatures > 30°C (Bonus)
+-  Displays total forecast records count (Bonus)
 
 ## Technologies Used
 
@@ -36,5 +36,15 @@ This application provides a clean, responsive interface to view weather forecast
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/YOUR_USERNAME/weather-app.git
-cd weather-app
+git clone https://github.com/Padmavathi-SJ/github_CI_CD_test.git
+cd github_CI_CD_test/weather-app-fixed
+```
+
+## Install dependencies:
+- npm install
+
+## Run the application locally:
+- ng serve
+
+## Open your browser and navigate to:
+- http://localhost:4200
