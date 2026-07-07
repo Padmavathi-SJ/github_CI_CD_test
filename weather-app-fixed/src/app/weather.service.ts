@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 export interface WeatherForecast {
   date: string;
@@ -14,42 +13,14 @@ export interface WeatherForecast {
   providedIn: 'root'
 })
 export class WeatherService {
-  private apiUrl = '/api/Weatherforecast';
+  // Use direct URL - works in both dev and production
+  private apiUrl = 'https://sampleapi20260706g3-bvdacte9b0dvhudv.canadacentral-01.azurewebsites.net/Weatherforecast';
 
   constructor(private http: HttpClient) {
-    console.log('WeatherService initialized');
+    console.log('API URL:', this.apiUrl);
   }
 
   getWeatherForecasts(): Observable<WeatherForecast[]> {
-    console.log('Calling API:', this.apiUrl);
-    
-    // Get response as text first, then parse to JSON
-    return this.http.get(this.apiUrl, { responseType: 'text' }).pipe(
-      map((response: string) => {
-        console.log('Raw response:', response);
-        // Clean the response - remove any BOM or special characters
-        const cleanResponse = response.trim();
-        // Parse the cleaned response
-        return JSON.parse(cleanResponse) as WeatherForecast[];
-      }),
-      catchError(this.handleError)
-    );
-  }
-
-  private handleError(error: HttpErrorResponse) {
-    console.error('API Error:', error);
-    
-    let errorMessage = 'An error occurred while fetching weather data.';
-    
-    if (error.error instanceof ErrorEvent) {
-      // Client-side error
-      errorMessage = `Error: ${error.error.message}`;
-    } else {
-      // Server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    
-    console.error(errorMessage);
-    return throwError(() => errorMessage);
+    return this.http.get<WeatherForecast[]>(this.apiUrl);
   }
 }
