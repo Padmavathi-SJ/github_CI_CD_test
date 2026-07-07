@@ -1,0 +1,15 @@
+{
+  "/api": {
+    "target": "https://sampleapi20260706g3-bvdacte9b0dvhudv.canadacentral-01.azurewebsites.net",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/api": ""
+    },
+    "headers": {
+      "Accept": "application/json",
+      "Content-Type": "application/json"
+    }
+  }
+}
